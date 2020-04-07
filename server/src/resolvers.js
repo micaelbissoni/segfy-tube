@@ -2,8 +2,8 @@ import videoModel from "./models/video-model";
 
 const resolvers = {
   Query: {
-    videosSaved: async (root, { limit }, context) =>
-      await videoModel.videosSaved({ limit }, context),
+    queriesSaved: async (root, { limit }, context) =>
+      await videoModel.queriesSaved({ limit }, context),
   },
   Mutation: {
     searchVideo: async (parent, { video: args }, context) =>

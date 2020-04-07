@@ -21,7 +21,7 @@ export default class YoutubeController {
           const itemsMaped = items.map((item) => {
             const { id, snippet } = item;
             snippet.id = id;
-            return snippet;
+            return snippet ? snippet : false;
           });
           resolve(itemsMaped);
         })

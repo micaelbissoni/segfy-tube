@@ -10,26 +10,32 @@ const typeDefs = gql`
   }
 
   type Id {
-    videoId: String!
-    kind: String!
+    videoId: String
+    kind: String
   }
 
   type Media {
-    url: String!
+    url: String
     width: Int
-    height: Int!
+    height: Int
   }
 
   type Thumbnails {
-    medium: Media!
+    medium: Media
   }
 
   type Video {
     id: Id!
     title: String!
-    description: String!
-    channelTitle: String!
+    description: String
+    channelTitle: String
     thumbnails: Thumbnails!
+  }
+
+  type SearchResult {
+    _id: String!
+    query: String
+    result: [Video]
   }
 
   input SearchInput {
@@ -37,11 +43,11 @@ const typeDefs = gql`
   }
 
   type Query {
-    videosSaved(limit: Int): [Video]
+    queriesSaved(limit: Int): [SearchResult]
   }
 
   type Mutation {
-    searchVideo(video: SearchInput): [Video]
+    searchVideo(video: SearchInput): SearchResult
   }
 `;
 

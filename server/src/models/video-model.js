@@ -7,12 +7,12 @@ const youtubeCtrl = new YoutubeController();
 
 const publicFields = {
   _id: 1,
-  name: 1,
-  youtubeResult: 1,
+  query: 1,
+  result: 1,
 };
 
 const videoModel = {
-  async videosSaved({ limit }, { user }) {
+  async queriesSaved({ limit }, { user }) {
     const docs = await videoCol
       .getCol()
       .find(
@@ -20,23 +20,39 @@ const videoModel = {
         {
           projection: publicFields,
           limit,
-          sort: { _id: -1 },
         }
       )
       .toArray();
     return docs;
   },
   async search(videoData, { user }) {
-    let video = await videoCol.getCol().insertOne(videoData);
+    const youtubeResponse = await youtubeCtrl
+      .searchVideo(videoData)
+      .then((response) => {
+        return response;
+      });
 
-    video = video.result && video.result.ok && video.ops[0];
-    if (!video || !video._id) {
-      throw new Error("Não foi possível criar nova busca de vídeo.");
+    const findAndUpdate = await videoCol
+      .getCol()
+      .findOneAndUpdate(
+        { query: videoData.query },
+        { $set: { result: youtubeResponse } },
+        { returnOriginal: false }
+      );
+
+    if (findAndUpdate.ok && findAndUpdate.value) {
+      return findAndUpdate.value;
+    } else {
+      videoData.result = youtubeResponse;
+      let video = await videoCol.getCol().insertOne(videoData);
+
+      video = video.result && video.result.ok && video.ops[0];
+      if (!video || !video._id) {
+        throw new Error("Não foi possível criar nova busca de vídeo.");
+      } else {
+        return video;
+      }
     }
-
-    return await youtubeCtrl.searchVideo(video).then((response) => {
-      return response;
-    });
   },
 };
 
