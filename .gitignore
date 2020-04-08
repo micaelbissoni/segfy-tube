@@ -1,0 +1,50 @@
+# Dependency directory
+node_modules
+settings/settings-server.js
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+app/dist
+app/tmp
+app/out-tsc
+# Only exists if Bazel was run
+app/bazel-out
+
+# dependencies
+app/node_modules
+
+# profiling files
+app/chrome-profiler-events*.json
+app/speed-measure-plugin*.json
+
+# IDEs and editors
+app/.idea
+app/.project
+app/.classpath
+app/.c9/
+app/*.launch
+app/.settings/
+app/*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,52 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="first-toolbar">
+    <button mat-icon-button (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1>SegfyTube</h1>
+    <span class="menu-spacer"></span>
+    <div>
+      <span class="note">Sua busca do Youtube termina aqui.</span>
+    </div>
+  </mat-toolbar-row>
+  <mat-toolbar-row class="second-toolbar" *ngIf="searchBarIsVisible">
+    <form class="search-container" [formGroup]="searchForm" novalidate (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>O que você procura?</mat-label>
+        <input formControlName="query" matInput type="text">
+        <button mat-icon-button matSuffix [attr.aria-label]="'Busca por vídeos'" type="submit"
+          [disabled]="!searchForm.valid">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </form>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-drawer-container class="video-container" [ngClass]="{'searchBarOn': searchBarIsVisible}" autosize>
+  <mat-drawer #drawer class="video-sidenav" mode="side">
+    <app-queries-saved (tagChange)="selectTag($event)"></app-queries-saved>
+  </mat-drawer>
+  <div class="video-sidenav-content">
+    <div class="video-container-list">
+      <mat-card class="video-card" *ngFor="let video of data.searchVideo.result">
+        <mat-card-header>
+          <mat-card-title>{{ video.title }}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image
+          [src]="video.thumbnails.medium.url"
+          [alt]="video.description">
+        <mat-card-content>
+          <p>
+            {{ video.description }}
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</mat-drawer-container>
+
+<div class="button-container-fixed">
+  <button mat-mini-fab aria-label="Botão de busca flutuante" (click)="toggleSearchBar()">
+    <mat-icon>{{searchBarIsVisible ? 'clear' : 'search'}}</mat-icon>
+  </button>
+</div>
