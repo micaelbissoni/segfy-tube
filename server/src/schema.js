@@ -33,13 +33,13 @@ const typeDefs = gql`
   }
 
   type SearchResult {
-    _id: String!
     query: String
     result: [Video]
   }
 
   input SearchInput {
     query: String!
+    type: String
   }
 
   type Query {
