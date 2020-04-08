@@ -1,0 +1,10 @@
+<div *ngIf="data;else noQueries">
+    <p>Pesquisas realizadas:</p>
+    <mat-chip-list aria-label="Fish selection">
+        <mat-chip color="accent" (click)="selectTag(tag)" *ngFor="let tag of data.queriesSaved; index as idx;">
+            #{{ tag.query }}</mat-chip>
+    </mat-chip-list>
+</div>
+<ng-template #noQueries>
+    <p>Nenhuma pesquisa foi realizada.</p>
+</ng-template>
