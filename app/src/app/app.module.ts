@@ -9,10 +9,14 @@ import { environment } from '../environments/environment';
 
 import { MaterialModule } from './material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { GraphQLModule } from './graphql.module';
+import { HttpClientModule } from '@angular/common/http';
+import { QueriesSavedComponent } from './components/queries-saved/queries-saved.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    QueriesSavedComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +24,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    GraphQLModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

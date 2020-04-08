@@ -8,6 +8,7 @@ const youtubeCtrl = new YoutubeController();
 const publicFields = {
   _id: 1,
   query: 1,
+  type: 1,
   result: 1,
 };
 

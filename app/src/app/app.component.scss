@@ -17,24 +17,40 @@
   &.searchBarOn {
     height: calc(100% - 128px);
   }
+  background: linear-gradient(black, #00001b);
   .video-sidenav-content {
     height: 100%;
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
-    background: linear-gradient(black, darkblue);
+    .mat-drawer-inner-container {
+      overflow-x: hidden;
+    }
     .video-container-list {
       display: flex;
-      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 15px 0 5px;
       .video-card {
         max-width: 250px;
         margin: 5px;
+        .mat-card-title {
+          font-size: 1em;
+          max-height: 40px;
+          overflow-y: scroll;
+        }
       }
     }
   }
 
   .video-sidenav {
     justify-content: start;
+    max-width: 260px;
+  }
+}
+
+.first-toolbar, .second-toolbar {
+  @media screen and (max-width: 480px) {
+    height: 70px;
   }
 }
 

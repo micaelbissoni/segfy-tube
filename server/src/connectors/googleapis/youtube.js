@@ -4,7 +4,7 @@ import settings from "../../settings";
 export default class YoutubeController {
   constructor() {}
 
-  async searchVideo({ query }) {
+  async searchVideo({ query, type }) {
     return new Promise(function (resolve, reject) {
       const youtube = google.youtube({
         version: "v3",
@@ -15,6 +15,8 @@ export default class YoutubeController {
         .list({
           part: "id,snippet",
           q: query,
+          type: type ? type : "video",
+          maxResults: "8",
         })
         .then(({ data }) => {
           const items = [...data.items];
