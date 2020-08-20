@@ -17,7 +17,7 @@
   "dependencies": {
     "apollo-server": "^2.0.0",
     "aws-sdk": "^2.585.0",
-    "bcrypt": "^3.0.0",
+    "bcrypt": "^5.0.0",
     "graphql": "^0.13.2",
     "jsonwebtoken": "^8.3.0",
     "mod10-check-digit": "^1.0.0",
